@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clase 2</title>
+</head>
+<body>
+    <div id="root"></div>
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    <!-- con REACT
+
+    <script type="text/javascript">
+        /*Una forma estática de crear elementos con react
+        const myChild = React.createElement("span",null, "soy un span")
+        const element = React.createElement("div", null, myChild);
+        const container= document.querySelector("#root");
+        ReactDOM.render(element,container); */
+
+        /* Una forma más dinámica desde react con JS
+        function MyDiv(props){
+            console.log(props)
+            return React.createElement("div", null, props.text);
+        }
+
+        const container = document.querySelector("#root");
+        const element = React.createElement(MyDiv,{text: "hola"},React.createElement("span", null, "Hola soy un span") )
+        ReactDOM.render(element, container); 
+        */
+    </script>
+    -->
+
+    <script type="text/babel">
+        /*toda variable en JSX va entre llaveS, salvo que sea un string*/
+        const lista= ["Titanic", "Los Vengadores"]
+        const colors= ["red", "blue"]
+        
+        function MyLi(props){
+            return <li style={{color:props.color}}>{props.children}</li> //xq van {{}} x2 ???
+        }
+
+        function MyUl(){
+            /* Una forma estática de ir colocando los "li" dentro del "ul"
+            return <ul>
+                <MyLi color="red">
+                    My string
+                    <img src="" alt="">
+                </MyLi>
+                </ul> 
+            */
+            // Nos quedamos con una forma más dinámica, utilizando map
+            return <ul>
+                {lista.map((element, index) => <MyLi color= {colors[index]}> {element} </MyLi>)}
+                </ul>
+        }
+
+        function MyDiv(props){
+            return (
+                <div class={props.miestilo}>
+                    <MyUl/>
+                </div>
+            );
+        }
+
+        ReactDOM.render(
+            <MyDiv miestilo="item"/>,
+            document.querySelector("#root")
+        );
+
+    </script>
+</body>
+</html>
